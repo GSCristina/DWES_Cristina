@@ -17,3 +17,11 @@
 ---
 
 ![1790236465254](image/UD1/1790236465254.png)
+
+## PHP.INI
+
+Mostramos la mayoria de errores que vienen por defecto
+
+![1790238030058](image/UD1/1790238030058.png)
+
+![1790238075671](image/UD1/1790238075671.png)
