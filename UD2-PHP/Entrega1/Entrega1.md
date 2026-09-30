@@ -47,7 +47,7 @@
 
 ![1790327914026](image/Entrega1/1790327914026.png)
 
-## Programa 4
+### Programa 4
 
 * Especificadores  con el comando printf.
 
@@ -67,11 +67,11 @@ La diferencia entre printf y sprintf es que imprime directamente perdiendose el 
 
 Puede especificarse entre comillas simples, dobles, heredoc y nowdoc
 
-Con las comillas simples no se realizaran sustituciones: 
+Con las comillas simples no se realizaran sustituciones:
 
 ![1790578789682](image/Entrega1/1790578789682.png)
 
-## Programa 5 (Cadenas)
+### Programa 5 (Cadenas)
 
 * Unicode
 
@@ -82,3 +82,64 @@ Con las comillas simples no se realizaran sustituciones:
 * Secuencias de escape útiles
 
 ![1790579506425](image/Entrega1/1790579506425.png)
+
+## Datos y funciones
+
+* gettype()
+* settype()
+* isset ()
+* unset()
+
+![1790681330606](image/Entrega1/1790681330606.png)
+
+### Evitar errores
+
+* **error_reporting**(**0**);
+
+![1790681510536](image/Entrega1/1790681510536.png)![1790681521147](image/Entrega1/1790681521147.png)
+
+## Constantes y constantes predefinidas
+
+![1790682015226](image/Entrega1/1790682015226.png)
+
+![1790682356670](image/Entrega1/1790682356670.png)
+
+### Predefinidas
+
+<pre>Array
+(
+    [E_ERROR] => 1
+    [E_RECOVERABLE_ERROR] => 4096
+    [E_WARNING] => 2
+    [E_PARSE] => 4
+    [E_NOTICE] => 8
+    [E_STRICT] => 2048
+    ...
+)
+</pre>
+
+![1790682629075](image/Entrega1/1790682629075.png)
+
+### Programa 8
+
+![1790763199694](image/Entrega1/1790763199694.png)
+
+## Fechas y horas
+
+![1790763249406](image/Entrega1/1790763249406.png)
+
+![1790763263002](image/Entrega1/1790763263002.png)
+
+### Programa 9
+
+![1790764717115](image/Entrega1/1790764717115.png)
+
+## Variables Especiales de PHP (superglobals)
+
+![1790764867640](image/Entrega1/1790764867640.png)
+
+### Programa 10
+
+
+
+![1790765617098](image/Entrega1/1790765617098.png)![1790765606557](image/Entrega1/1790765606557.png)
