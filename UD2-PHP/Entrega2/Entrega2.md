@@ -120,7 +120,6 @@ echo "Precio con IVA (10%): " . precioConIVA($precioBase, 10) . " €<br>";
 1. Si quieres que esto ocurra debes definir el parámetro para que su valor se pase **por referencia** , añadiendo el símbolo **&** antes de su nombre.
 2. NO PONEMOS RETURN
 
-
 ```php
 <?php
     print "<br/><br/>  ARGUMENTOS POR valor y por referencia <br  /> ";//ARGUMENTOS POR DEFECTO
@@ -144,7 +143,6 @@ echo "Precio con IVA (10%): " . precioConIVA($precioBase, 10) . " €<br>";
 ### Argumentos variables
 
 * Existen **dos enfoques** : el moderno con `...$args` y el clásico con `func_get_args()`
-
 
 ```php
 <?php
@@ -198,7 +196,6 @@ La diferencia clave entre `include` y `require` es:
 
 ![1790932806140](image/Entrega2/1790932806140.png)
 
-
 ```php
 <?php
 echo "<h2>Pruebas de strip_tags</h2>";
@@ -225,3 +222,182 @@ echo htmlspecialchars($texto, ENT_QUOTES, 'UTF-8'); // htmlspecialchars() convie
 * PIE (GitHub) [PIE_ENLACE](https://github.com/php/pie)
 
 ![1790933006688](image/Entrega2/1790933006688.png)
+
+## Arrays
+
+#### Programa 21
+
+```php
+<?php
+//Ejemplo Definición de array simple
+
+$array1 = array(
+    "comida" => "pizza",
+    "pizza" => "comida",
+);
+
+echo $array1["comida"] . "<br>"; // muestra pizza
+
+// a partir de PHP 5.4
+$array2 = [
+    "comida" => "pizza",
+    "pizza" => "comida",
+];
+echo $array2["pizza"]; // muestra comida
+
+//mostrar un valor de cada uno
+
+?>
+```
+
+### Arrays Multidimensionales
+
+#### Programa 22
+
+```php
+<?php
+$ciclos = array( 
+    "DAW" => array(     "PR"   => "Programación",    "BD"   => "Bases de datos",    "DWES" => "Desarrollo web en entorno servidor"),
+    "DAM" => array(     "PR"   => "Programación",    "BD"   => "Bases de datos",    "SGE" => "Sistemas de gestión empresarial")
+);
+
+//Array creado paso a paso
+$modulos1[0] = "Programación";
+$modulos1[1] = "Bases de datos";
+$modulos1[2] = "Desarrollo web en entorno servidor";
+
+// Mostrar elementos de array numérico
+echo "<h3>Array numérico</h3>";
+for ($i = 0; $i < count($modulos1); $i++) {
+    echo "Módulo $i: " . $modulos1[$i] . "<br>";
+}
+
+// Mostrar elementos de array asociativo
+echo "<h3>Array asociativo</h3>";
+foreach ($ciclos['DAW'] as $clave => $valor) { // Recorrer array asociativo, debes indicar la clave del array asociativo que quieres recorrer
+    echo "Siglas $clave => $valor <br>";
+}
+// Mostrar elementos de array multidimensional
+foreach ($ciclos as $ciclo => $modulos) {
+    echo "Ciclo: $ciclo <br>";
+    foreach ($modulos as $codigo => $nombre) {
+        echo "Módulo: $codigo => $nombre <br>";
+    }
+}
+?>
+```
+
+### Funciones para recorrer arrays
+
+#### Progama 23
+
+```php
+<?php
+// Definir el array con ciudades
+$ciudades = array("Sevilla", "Granada", "Córdoba", "Málaga", "Cádiz");
+
+/* Programa23: COPIA COLOCA LAS FUNCIONES DONDE CORRESPONDADN :
+next($ciudades) 
+reset($ciudades) 
+prev($ciudades) 
+end($ciudades)
+current($ciudades)
+key($ciudades) 
+*/
+
+// 1. "FUNCION ARRAY RESET O CURRENT" → primer elemento
+echo "Primer elemento con : " . "FUNCION ARRAY RESET O CURRENT" .current($ciudades) . "<br>";
+echo "Clave actual: " . key($ciudades) . "<br><br>";
+
+// 2. "FUNCION ARRAY NEXT" → avanzar
+echo "Siguiente Elemento con : " . "FUNCION ARRAY NEXT"  .next ($ciudades) . "<br>";
+echo "Clave actual: " . key($ciudades) . "<br><br>";
+
+// 3. "FUNCION ARRAY PREV" → retroceder
+echo "Elemento con  : " . "FUNCION ARRAY PREV"  .prev ($ciudades) . "<br>";
+echo "Clave actual: " . key($ciudades) . "<br><br>";
+
+// 4. "FUNCION ARRAY END" → último elemento
+echo "Último elemento con : " . "FUNCION ARRAY END"  .end($ciudades) . "<br>";
+echo "Clave actual: " . key($ciudades) . "<br><br>";
+
+// 5. next() después del último → fuera del array
+$valor = next($ciudades);
+if ($valor === false && key($ciudades) === null) {
+    echo "El puntero está fuera del array (hemos pasado el final).<br>";
+} else {
+    echo "Elemento actual: $valor<br>";
+}
+
+//Vamos a forzar a forzar que se muestre
+echo "Elemento con next() fuera del array: " . next($ciudades) . "<br>";
+echo "Clave actual: " . key($ciudades) . "<br><br>";
+?>
+```
+
+### Funciones de datos compuestos
+
+![1791185209990](image/Entrega2/1791185209990.png)
+
+#### Programa 24
+
+```php
+<?php
+$array = ["manzana", "pera", "uva"];
+
+echo "<h1>Funciones para trabajar con arrays</h1>";
+
+echo "<h2>Añadir elemento</h2>";
+$array[] = "naranja";
+echo "Se añade naranja al final: ";
+print_r($array);
+
+echo "<h2>Modificar elemento</h2>";
+$array[2] = "uva modificada";
+echo "Se modifica la posición 2: ";
+print_r($array);
+
+echo "<h2>Eliminar elemento</h2>";
+unset($array[2]);
+echo "Se elimina la posición 2: ";
+print_r($array);
+echo "El índice 2 ya no existe: " . (array_key_exists(2, $array) ? "sí" : "no") . "<br>";
+
+echo "<h2>Reindexar array numérico</h2>";
+$array = array_values($array);
+echo "Después de array_values(): ";
+print_r($array);
+echo "El índice 2 existe ahora: " . (array_key_exists(2, $array) ? "sí" : "no") . "<br>";
+
+echo "<h2>Comprobar si es un array</h2>";
+echo "¿$array es un array? ";
+echo is_array($array) ? "true<br>" : "false<br>";
+
+echo "<h2>Contar elementos</h2>";
+echo "Número de elementos: " . count($array) . "<br>";
+
+echo "<h2>Buscar valor</h2>";
+$valorBuscado = "pera";
+echo "¿Está $valorBuscado en el array? ";
+echo in_array($valorBuscado, $array, true) ? "true<br>" : "false<br>";
+
+echo "<h2>Buscar valor y obtener su clave</h2>";
+$claveEncontrada = array_search($valorBuscado, $array, true);
+if ($claveEncontrada !== false) {
+	echo "La clave de $valorBuscado es $claveEncontrada.<br>";
+} else {
+	echo "El valor $valorBuscado no está en el array.<br>";
+}
+
+echo "<h2>Buscar clave</h2>";
+$claveBuscada = 1;
+echo "¿Existe la clave $claveBuscada? ";
+echo array_key_exists($claveBuscada, $array) ? "true<br>" : "false<br>";
+?>
+```
+
+## pFormularios
+
+### Programa 25
+
+![1791286174294](image/Entrega2/1791286174294.png)
