@@ -93,3 +93,26 @@ Route::middleware('auth')->group(function () {
 });
 Route::resource('user', UserController::class);
 Route::apiResource('apiuser', UserController::class);
+
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::get('/inicio', function () {
+    return view('paginas.inicio');
+});
+
+Route::get('/posts', function () {
+    return view('posts.index');
+});
+
+Route::get('/login', function () {
+    return view('auth.login');
+});
+
+use App\Http\Controllers\PostController;
+
+Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts/{id}', [PostController::class, 'show']);
+
