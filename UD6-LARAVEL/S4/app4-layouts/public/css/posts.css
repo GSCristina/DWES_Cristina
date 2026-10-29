@@ -1,0 +1,11 @@
+.tarjeta h2 {
+    margin-top: 0;
+    color: #8639b3;
+}
+
+.tarjeta a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #a72bb8;
+    font-weight: bold;
+}
