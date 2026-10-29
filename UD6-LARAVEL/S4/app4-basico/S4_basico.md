@@ -2,8 +2,7 @@
 
 Con ciertas instrucciones podemos rellenar los huecos marcados por estas con @yield.
 
-![1793005149951](image/README/1793005149951.png)
-
+![1793288136702](image/S4_basico/1793288136702.png)
 
 ```php
 <!DOCTYPE html>
@@ -40,8 +39,6 @@ Con ciertas instrucciones podemos rellenar los huecos marcados por estas con @yi
 
 ## Heredar el layout desde inicio
 
-
-
 ```php
 @extends('layouts.app')
 
@@ -56,14 +53,14 @@ Con ciertas instrucciones podemos rellenar los huecos marcados por estas con @yi
 @endsection
 ```
 
-![1793005351330](image/README/1793005351330.png)
+![1793288223262](image/S4_basico/1793288223262.png)
 
 ## Pasar datos a la vista
 
-![1793005719166](image/README/1793005719166.png)
+![1793288235920](image/S4_basico/1793288235920.png)
 
-Comprobación de comprensión
+## Comprobación de comprensión
 
-![1793006423697](image/README/1793006423697.png)
+![1793288252677](image/S4_basico/1793288252677.png)
 
-![1793006719209](image/README/1793006719209.png)
+![1793288261974](image/S4_basico/1793288261974.png)
