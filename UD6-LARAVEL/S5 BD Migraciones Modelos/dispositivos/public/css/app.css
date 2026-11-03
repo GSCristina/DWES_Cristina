@@ -1,0 +1,241 @@
+/* =========================================================
+   Estilos para el proyecto "dispositivos"
+   Vistas: catalogo, resumen, ordenadores/show, moviles/show
+   Ubicación: public/css/app.css
+   Solo usa selectores de elemento: no hace falta tocar el HTML
+   (únicamente añadir el <link> en el <head> de cada vista).
+   ========================================================= */
+
+:root {
+    --bg: #f5f7fb;
+    --surface: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --primary-soft: #dbeafe;
+    --code-bg: #eef2ff;
+    --code-text: #4338ca;
+    --shadow: 0 1px 3px rgba(0, 0, 0, .08), 0 4px 12px rgba(0, 0, 0, .04);
+    --radius: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0f172a;
+        --surface: #1e293b;
+        --text: #e5e7eb;
+        --muted: #94a3b8;
+        --border: #334155;
+        --primary: #60a5fa;
+        --primary-hover: #93c5fd;
+        --primary-soft: #1e3a5f;
+        --code-bg: #312e81;
+        --code-text: #c7d2fe;
+        --shadow: 0 1px 3px rgba(0, 0, 0, .4);
+    }
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0 auto;
+    max-width: 860px;
+    padding: 2rem 1.25rem 4rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+/* ---------- Títulos ---------- */
+h1,
+h2,
+h3 {
+    line-height: 1.25;
+    margin: 0 0 .75rem;
+}
+
+h1 {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    padding-bottom: .75rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid var(--primary);
+}
+
+h2 {
+    font-size: 1.35rem;
+    margin-top: 2.25rem;
+    padding-left: .75rem;
+    border-left: 4px solid var(--primary);
+}
+
+h3 {
+    font-size: 1.1rem;
+}
+
+/* ---------- Texto ---------- */
+p {
+    margin: 0 0 .75rem;
+}
+
+code {
+    padding: .15em .4em;
+    border-radius: 6px;
+    background: var(--code-bg);
+    color: var(--code-text);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .9em;
+}
+
+/* ---------- Enlaces ---------- */
+a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+a:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ---------- Tarjetas del catálogo ---------- */
+article {
+    margin-bottom: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+article:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .12);
+}
+
+article h3 {
+    margin-bottom: .5rem;
+}
+
+article p {
+    margin-bottom: .25rem;
+    color: var(--muted);
+}
+
+/* Precio destacado (último párrafo antes del enlace) */
+article p:nth-of-type(4) {
+    margin-top: .5rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* Botón "Ver ordenador" / "Ver móvil" */
+article a {
+    display: inline-block;
+    margin-top: .85rem;
+    padding: .5rem 1rem;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 8px;
+    font-size: .95rem;
+    transition: background .15s ease;
+}
+
+article a:hover,
+article a:focus-visible {
+    background: var(--primary-hover);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* ---------- Mensajes "No hay ... registrados" ---------- */
+h2 + p {
+    padding: 1rem 1.25rem;
+    background: var(--primary-soft);
+    border-radius: var(--radius);
+    color: var(--text);
+}
+
+/* ---------- Páginas de detalle (show) ---------- */
+body > h1 + p {
+    margin-top: 0;
+}
+
+/* Datos del detalle en formato ficha */
+body > p {
+    padding: .6rem 1rem;
+    margin-bottom: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-bottom: none;
+}
+
+body > p:first-of-type {
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+body > p:has(+ a:last-child) {
+    border-bottom: 1px solid var(--border);
+    border-radius: 0 0 var(--radius) var(--radius);
+}
+
+/* Enlace "Volver al catálogo" */
+body > a {
+    display: inline-block;
+    margin-top: 1.5rem;
+}
+
+body > a::before {
+    content: "← ";
+}
+
+/* ---------- Página de resumen ---------- */
+/* Los párrafos del resumen son texto corrido, no fichas */
+body > h2 ~ p {
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+}
+
+body > p:last-child {
+    margin-top: 2rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+    body {
+        padding: 1.25rem .9rem 3rem;
+    }
+
+    article {
+        padding: 1rem;
+    }
+
+    article a {
+        display: block;
+        text-align: center;
+    }
+}
