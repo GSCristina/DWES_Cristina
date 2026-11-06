@@ -7,35 +7,38 @@
     <title>Nuevo producto</title>
 </head>
 <body>
-    <h1>Registrar producto</h1>
+    <h1>Crear producto</h1>
+    <a href="{{ route('productos.index') }}">Volver al listado</a>
+
+    @if ($errors->any())
+        <div role="alert">
+            <p>Revisa los datos introducidos:</p>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <form action="{{ route('productos.store') }}" method="POST">
         @csrf
 
-        <div>
-            <label for="nombre">Nombre</label>
-            <input id="nombre" name="nombre" type="text"
-                   value="{{ old('nombre') }}" required maxlength="100">
-            @error('nombre') <p>{{ $message }}</p> @enderror
-        </div>
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" value="{{ old('nombre') }}">
+        @error('nombre') <p role="alert">{{ $message }}</p> @enderror
 
-        <div>
-            <label for="precio">Precio (€)</label>
-            <input id="precio" name="precio" type="number" step="0.01"
-                   min="0" value="{{ old('precio') }}" required>
-            @error('precio') <p>{{ $message }}</p> @enderror
-        </div>
+        <label for="precio">Precio</label>
+        <input id="precio" name="precio" type="number" min="0" step="0.01"
+               value="{{ old('precio') }}">
+        @error('precio') <p role="alert">{{ $message }}</p> @enderror
 
-        <div>
-            <label for="stock">Stock</label>
-            <input id="stock" name="stock" type="number" step="1"
-                   min="0" value="{{ old('stock', 0) }}" required>
-            @error('stock') <p>{{ $message }}</p> @enderror
-        </div>
+        <label for="stock">Stock</label>
+        <input id="stock" name="stock" type="number" min="0" step="1"
+               value="{{ old('stock', 0) }}">
+        @error('stock') <p role="alert">{{ $message }}</p> @enderror
 
         <button type="submit">Guardar producto</button>
     </form>
-
-    <p><a href="{{ route('productos.index') }}">Volver al catálogo</a></p>
 </body>
 </html>

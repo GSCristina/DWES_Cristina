@@ -1,0 +1,7 @@
+@php($cursos = ['HTML y CSS', 'JavaScript', 'PHP y Laravel'])
+<div class="campo"><label for="name">Nombre completo *</label><input id="name" name="name" required maxlength="255" value="{{ old('name', $user->name ?? '') }}" autocomplete="name"></div>
+<div class="campo"><label for="email">Correo electrónico *</label><input id="email" type="email" name="email" required maxlength="255" value="{{ old('email', $user->email ?? '') }}" autocomplete="email"></div>
+<div class="campo"><label for="curso_web">Curso web *</label><select id="curso_web" name="curso_web" required><option value="">Selecciona un curso</option>@foreach ($cursos as $curso)<option value="{{ $curso }}" @selected(old('curso_web', $user->curso_web ?? '') === $curso)>{{ $curso }}</option>@endforeach</select></div>
+<div class="campo"><label for="password">Contraseña {{ isset($user) ? '(dejar vacía para conservarla)' : '*' }}</label><input id="password" name="password" type="password" {{ isset($user) ? '' : 'required' }} minlength="8" autocomplete="new-password"></div>
+<div class="campo"><label for="password_confirmation">Confirmar contraseña</label><input id="password_confirmation" name="password_confirmation" type="password" {{ isset($user) ? '' : 'required' }} minlength="8" autocomplete="new-password"></div>
+<div class="fila acciones-formulario"><button type="submit" class="boton">{{ isset($user) ? 'Guardar cambios' : 'Crear usuario' }}</button><a class="boton secundario" href="{{ route('usuarios.index') }}">Cancelar</a></div>

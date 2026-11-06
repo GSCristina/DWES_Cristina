@@ -2,13 +2,12 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Productos</title>
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
-    <title>Catálogo de productos</title>
 </head>
 <body>
     <h1>Catálogo de productos</h1>
-    <p><a href="{{ route('productos.create') }}">Añadir producto</a></p>
+    <a href="{{ route('productos.create') }}">Añadir producto</a>
 
     @if (session('success'))
         <p role="status">{{ session('success') }}</p>
@@ -18,10 +17,17 @@
         <article>
             <h2>{{ $producto->nombre }}</h2>
             <p>Precio: {{ number_format($producto->precio, 2, ',', '.') }} €</p>
-            <p>Unidades disponibles: {{ $producto->stock }}</p>
+            <p>Stock: {{ $producto->stock }}</p>
+            <a href="{{ route('productos.show', $producto) }}">Ver</a>
+            <a href="{{ route('productos.edit', $producto) }}">Editar</a>
+            <form action="{{ route('productos.destroy', $producto) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Eliminar</button>
+            </form>
         </article>
     @empty
-        <p>Todavía no hay productos registrados.</p>
+        <p>No hay productos registrados.</p>
     @endforelse
 </body>
 </html>

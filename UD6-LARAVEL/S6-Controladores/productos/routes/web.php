@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
 
@@ -11,3 +11,8 @@ Route::get('/productos/crear', [ProductoController::class, 'create'])
 
 Route::post('/productos', [ProductoController::class, 'store'])
     ->name('productos.store');
+
+Route::resource('productos', ProductoController::class);
+
+Route::redirect('/', '/usuarios');
+Route::resource('usuarios', UserController::class)->parameters(['usuarios' => 'user']);

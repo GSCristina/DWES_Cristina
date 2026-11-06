@@ -2,37 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductoRequest;
+use App\Http\Requests\UpdateProductoRequest;
 use App\Models\Producto;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ProductoController extends Controller
 {
-    // GET /productos: consulta y muestra el catálogo.
-    public function index()
+    public function index(): View
     {
         $productos = Producto::orderBy('id', 'desc')->get();
         return view('productos.index', compact('productos'));
     }
 
-    // GET /productos/crear: presenta el formulario.
-    public function create()
+    public function create(): View
     {
         return view('productos.create');
     }
 
-    // POST /productos: valida y guarda el nuevo producto.
-    public function store(Request $request)
+    public function store(StoreProductoRequest $request): RedirectResponse
     {
-        $datos = $request->validate([
-            'nombre' => ['required', 'string', 'max:100'],
-            'precio' => ['required', 'numeric', 'min:0'],
-            'stock' => ['required', 'integer', 'min:0'],
-        ]);
+        Producto::create($request->validated());
 
-        Producto::create($datos);
+        return redirect()->route('productos.index')
+            ->with('success', 'Producto creado correctamente.');
+    }
 
-        return redirect()
-            ->route('productos.index')
-            ->with('success', 'Producto almacenado correctamente.');
+    public function show(Producto $producto): View
+    {
+        return view('productos.show', compact('producto'));
+    }
+
+    public function edit(Producto $producto): View
+    {
+        return view('productos.edit', compact('producto'));
+    }
+
+    public function update(
+        UpdateProductoRequest $request,
+        Producto $producto
+    ): RedirectResponse {
+        $producto->update($request->validated());
+
+        return redirect()->route('productos.index')
+            ->with('success', 'Producto actualizado correctamente.');
+    }
+
+    public function destroy(Producto $producto): RedirectResponse
+    {
+        $producto->delete();
+
+        return redirect()->route('productos.index')
+            ->with('success', 'Producto eliminado correctamente.');
     }
 }

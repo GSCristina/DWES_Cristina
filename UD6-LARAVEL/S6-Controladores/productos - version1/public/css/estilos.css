@@ -1,0 +1,265 @@
+/* ==========================================================
+   Catálogo de productos · estilos para index.blade.php y
+   create.blade.php. No requiere clases: usa los elementos
+   HTML que ya tienen las vistas.
+   Colócalo en: public/css/estilos.css
+   ========================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap");
+
+:root {
+  --fondo: #eef1f6;
+  --superficie: #ffffff;
+  --tinta: #14213d;
+  --tinta-suave: #5b6577;
+  --linea: #d9dfea;
+  --acento: #2f5bff;
+  --acento-oscuro: #1f3fd1;
+  --ok-fondo: #e3f6ea;
+  --ok-borde: #1f9d55;
+  --error: #c62839;
+  --radio: 14px;
+  --sombra: 0 1px 2px rgba(20, 33, 61, .06), 0 8px 24px rgba(20, 33, 61, .06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #0e1424;
+    --superficie: #172038;
+    --tinta: #e9edf7;
+    --tinta-suave: #9aa6bd;
+    --linea: #2a3554;
+    --acento: #6f8dff;
+    --acento-oscuro: #8da4ff;
+    --ok-fondo: #12301f;
+    --ok-borde: #3ddc84;
+    --error: #ff7b8a;
+    --sombra: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  max-width: 1000px;
+  min-height: 100vh;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+
+  /* Rejilla: las tarjetas (article) se reparten solas */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.25rem;
+  align-content: start;
+}
+
+/* Todo lo que no es tarjeta ocupa la fila completa */
+body > *:not(article) {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Títulos ---------- */
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+}
+
+h2 {
+  margin: 0 0 .5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+p {
+  margin: 0;
+}
+
+/* ---------- Enlaces ---------- */
+a {
+  color: var(--acento);
+  text-underline-offset: .2em;
+}
+
+a:hover {
+  color: var(--acento-oscuro);
+}
+
+/* "Añadir producto" como botón */
+a[href$="/productos/crear"] {
+  display: inline-block;
+  padding: .65rem 1.2rem;
+  border-radius: 999px;
+  background: var(--acento);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .15s, transform .15s;
+}
+
+a[href$="/productos/crear"]:hover {
+  background: var(--acento-oscuro);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ---------- Mensaje flash de éxito ---------- */
+p[role="status"] {
+  padding: .85rem 1.1rem;
+  border-left: 5px solid var(--ok-borde);
+  border-radius: 8px;
+  background: var(--ok-fondo);
+  font-weight: 600;
+}
+
+/* ---------- Catálogo vacío ---------- */
+body > p:not([role]):not(:has(a)) {
+  padding: 2.5rem 1rem;
+  border: 2px dashed var(--linea);
+  border-radius: var(--radio);
+  color: var(--tinta-suave);
+  text-align: center;
+}
+
+/* ---------- Tarjeta de producto ---------- */
+article {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.35rem 1.35rem;
+  border: 1px solid var(--linea);
+  border-top: 5px solid var(--acento);
+  border-radius: var(--radio);
+  background: var(--superficie);
+  box-shadow: var(--sombra);
+}
+
+/* Precio: el dato protagonista de la tarjeta */
+article p:first-of-type {
+  order: 2;
+  margin: .35rem 0 .75rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: var(--acento);
+}
+
+/* Stock */
+article p:nth-of-type(2) {
+  order: 3;
+  margin-top: auto;
+  padding-top: .75rem;
+  border-top: 1px solid var(--linea);
+  font-size: .95rem;
+  color: var(--tinta-suave);
+}
+
+article h2 {
+  order: 1;
+}
+
+/* ---------- Formulario ---------- */
+form {
+  display: grid;
+  gap: 1.15rem;
+  max-width: 480px;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--superficie);
+  box-shadow: var(--sombra);
+}
+
+form div {
+  display: grid;
+  gap: .4rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: .95rem;
+}
+
+input {
+  width: 100%;
+  padding: .7rem .85rem;
+  border: 1.5px solid var(--linea);
+  border-radius: 10px;
+  background: var(--fondo);
+  color: inherit;
+  font: inherit;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+
+input:hover {
+  border-color: var(--tinta-suave);
+}
+
+input:focus-visible {
+  outline: none;
+  border-color: var(--acento);
+  background: var(--superficie);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--acento) 25%, transparent);
+}
+
+/* Campo con error de validación (el <p> con el mensaje va dentro del div) */
+form div:has(> p) input {
+  border-color: var(--error);
+}
+
+form div > p {
+  color: var(--error);
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+/* ---------- Botón de enviar ---------- */
+button {
+  padding: .8rem 1.4rem;
+  border: 0;
+  border-radius: 10px;
+  background: var(--acento);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s, transform .15s;
+}
+
+button:hover {
+  background: var(--acento-oscuro);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 3px;
+}
+
+/* ---------- Accesibilidad ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+
+  a[href$="/productos/crear"]:hover,
+  button:hover {
+    transform: none;
+  }
+}
