@@ -14,44 +14,44 @@ Los nombres de los modelos están en inglés; la interfaz está en español.
 
 ### `Brand` (marca)
 
-| Campo | Tipo | Notas |
-|---|---|---|
-| id | bigint PK | |
-| name | string | único |
-| country | string(80) | nullable |
-| description | text | nullable |
-| timestamps | | |
+| Campo       | Tipo       | Notas    |
+| ----------- | ---------- | -------- |
+| id          | bigint PK  |          |
+| name        | string     | único   |
+| country     | string(80) | nullable |
+| description | text       | nullable |
+| timestamps  |            |          |
 
 ### `Ingredient` (ingrediente)
 
-| Campo | Tipo | Notas |
-|---|---|---|
-| id | bigint PK | |
-| name | string | único |
-| description | text | nullable |
-| is_allergen | boolean | por defecto `false` |
-| timestamps | | |
+| Campo       | Tipo      | Notas                 |
+| ----------- | --------- | --------------------- |
+| id          | bigint PK |                       |
+| name        | string    | único                |
+| description | text      | nullable              |
+| is_allergen | boolean   | por defecto `false` |
+| timestamps  |           |                       |
 
 ### `Product` (modelo principal)
 
-| Campo | Tipo | Notas |
-|---|---|---|
-| id | bigint PK | |
-| brand_id | bigint FK → brands.id | `restrictOnDelete` |
-| name | string | |
-| description | text | nullable |
-| price | decimal(8,2) | precio en euros |
-| stock | unsigned integer | por defecto 0 |
-| is_available | boolean | disponibilidad, por defecto `true` |
-| timestamps | | |
+| Campo        | Tipo                   | Notas                                |
+| ------------ | ---------------------- | ------------------------------------ |
+| id           | bigint PK              |                                      |
+| brand_id     | bigint FK → brands.id | `restrictOnDelete`                 |
+| name         | string                 |                                      |
+| description  | text                   | nullable                             |
+| price        | decimal(8,2)           | precio en euros                      |
+| stock        | unsigned integer       | por defecto 0                        |
+| is_available | boolean                | disponibilidad, por defecto `true` |
+| timestamps   |                        |                                      |
 
 ### Tabla pivote `ingredient_product`
 
-| Campo | Tipo | Notas |
-|---|---|---|
-| product_id | FK → products.id | `cascadeOnDelete` |
-| ingredient_id | FK → ingredients.id | `cascadeOnDelete` |
-| (product_id, ingredient_id) | PK compuesta | impide combinaciones duplicadas |
+| Campo                       | Tipo                 | Notas                           |
+| --------------------------- | -------------------- | ------------------------------- |
+| product_id                  | FK → products.id    | `cascadeOnDelete`             |
+| ingredient_id               | FK → ingredients.id | `cascadeOnDelete`             |
+| (product_id, ingredient_id) | PK compuesta         | impide combinaciones duplicadas |
 
 ## 3. Diagrama
 
@@ -85,10 +85,10 @@ erDiagram
 
 ## 4. Relaciones
 
-| Relación | Tipo | Método Eloquent |
-|---|---|---|
-| Brand → Product | 1:N | `Brand::products()` (`hasMany`) y `Product::brand()` (`belongsTo`) |
-| Product ↔ Ingredient | N:M | `belongsToMany` en ambos modelos |
+| Relación             | Tipo | Método Eloquent                                                           |
+| --------------------- | ---- | -------------------------------------------------------------------------- |
+| Brand → Product      | 1:N  | `Brand::products()` (`hasMany`) y `Product::brand()` (`belongsTo`) |
+| Product ↔ Ingredient | N:M  | `belongsToMany` en ambos modelos                                         |
 
 ### ¿Por qué una relación necesita tabla pivote y la otra no?
 
@@ -106,16 +106,42 @@ erDiagram
 
 ## 6. Las siete acciones del Resource Controller (`ProductController`)
 
-| Acción | Método HTTP | URL | Nombre de ruta | Función |
-|---|---|---|---|---|
-| index | GET | /products | products.index | Listar (con buscador, filtro y paginación) |
-| create | GET | /products/create | products.create | Formulario de alta |
-| store | POST | /products | products.store | Guardar nuevo producto |
-| show | GET | /products/{product} | products.show | Detalle |
-| edit | GET | /products/{product}/edit | products.edit | Formulario de edición |
-| update | PUT/PATCH | /products/{product} | products.update | Actualizar |
-| destroy | DELETE | /products/{product} | products.destroy | Eliminar |
+| Acción | Método HTTP | URL                      | Nombre de ruta   | Función                                    |
+| ------- | ------------ | ------------------------ | ---------------- | ------------------------------------------- |
+| index   | GET          | /products                | products.index   | Listar (con buscador, filtro y paginación) |
+| create  | GET          | /products/create         | products.create  | Formulario de alta                          |
+| store   | POST         | /products                | products.store   | Guardar nuevo producto                      |
+| show    | GET          | /products/{product}      | products.show    | Detalle                                     |
+| edit    | GET          | /products/{product}/edit | products.edit    | Formulario de edición                      |
+| update  | PUT/PATCH    | /products/{product}      | products.update  | Actualizar                                  |
+| destroy | DELETE       | /products/{product}      | products.destroy | Eliminar                                    |
 
 ## 7. Decisión técnica: base de datos
 
 El enunciado menciona MySQL o MariaDB. Se utiliza **SQLite** (valor por defecto de Laravel 13, sin necesidad de servidor), con **autorización del profesor**. Las migraciones, claves foráneas y relaciones funcionan igual.
+
+## 8. Vista
+
+### Vista - Catálogo
+
+![1795008058081](image/01-diseno/1795008058081.png)
+
+### Vista - Nuevo producto
+
+![1795008138783](image/01-diseno/1795008138783.png)
+
+### Vista - Producto (Ver)
+
+![1795008208822](image/01-diseno/1795008208822.png)
+
+### Vista - Editar
+
+![1795008239631](image/01-diseno/1795008239631.png)
+
+### Funcion Eliminar
+
+![1795008276352](image/01-diseno/1795008276352.png)
+
+### Filtro de búsqueda
+
+![1795008316263](image/01-diseno/1795008316263.png)

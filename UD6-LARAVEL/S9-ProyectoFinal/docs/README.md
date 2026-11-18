@@ -26,7 +26,7 @@ Aplicación web para gestionar el catálogo de una tienda de cosmética inspirad
 ## Instalación
 
 ```powershell
-git clone <url-del-repositorio>
+git clone <https://github.com/GSCristina/DWES_Cristina.git>
 cd sephora-shop
 composer install
 copy .env.example .env
@@ -61,11 +61,11 @@ APP_FALLBACK_LOCALE=es
 
 Tras el seeder hay 10 marcas, 16 ingredientes y 28 productos. Registros fijos reconocibles:
 
-| Producto | Marca | Nota |
-|---|---|---|
-| Capture Totale Sérum | Dior | 3 ingredientes |
-| Soft Pinch Blush | Rare Beauty | Sin stock → «Agotado» |
-| Retinol 0.5% en Escualano | The Ordinary | 2 ingredientes |
+| Producto                  | Marca        | Nota                     |
+| ------------------------- | ------------ | ------------------------ |
+| Capture Totale Sérum     | Dior         | 3 ingredientes           |
+| Soft Pinch Blush          | Rare Beauty  | Sin stock → «Agotado» |
+| Retinol 0.5% en Escualano | The Ordinary | 2 ingredientes           |
 
 ## Estructura
 
@@ -98,24 +98,24 @@ docs/
 
 ## Versiones
 
-| Versión | Contenido | Commit |
-|---|---|---|
-| V0 | Análisis y diseño | `v0-diseno` |
-| V1 | Proyecto, migraciones y modelos | `v1-modelos-migraciones` |
-| V2 | Catálogo de lectura | `v2-catalogo` |
-| V3 | CRUD funcional | `v3-crud` |
-| V4 | Factories y Seeders | `v4-factories-seeders` |
-| V5 | Calidad y presentación final | `v5-calidad-final` |
+| Versión | Contenido                       | Commit                     |
+| -------- | ------------------------------- | -------------------------- |
+| V0       | Análisis y diseño             | `v0-diseno`              |
+| V1       | Proyecto, migraciones y modelos | `v1-modelos-migraciones` |
+| V2       | Catálogo de lectura            | `v2-catalogo`            |
+| V3       | CRUD funcional                  | `v3-crud`                |
+| V4       | Factories y Seeders             | `v4-factories-seeders`   |
+| V5       | Calidad y presentación final   | `v5-calidad-final`       |
 
 ## Lista final de verificación
 
-- [x] He elegido y justificado una tienda.
-- [x] He creado tres modelos y ambas relaciones.
-- [x] He implementado las siete acciones del Resource Controller principal.
-- [x] Las vistas y formularios funcionan en el navegador.
-- [x] La relación N:M se consulta y modifica desde el CRUD.
-- [x] Los formularios validan los datos y muestran los errores.
-- [x] Faker, Factory y Seeders generan un catálogo coherente.
-- [x] He añadido filtro o búsqueda, paginación y `with()`.
-- [x] He documentado cada versión y realizado sus pruebas.
-- [x] El README permite reproducir la instalación sin credenciales privadas.
+- [X] He elegido y justificado una tienda.
+- [X] He creado tres modelos y ambas relaciones.
+- [X] He implementado las siete acciones del Resource Controller principal.
+- [X] Las vistas y formularios funcionan en el navegador.
+- [X] La relación N:M se consulta y modifica desde el CRUD.
+- [X] Los formularios validan los datos y muestran los errores.
+- [X] Faker, Factory y Seeders generan un catálogo coherente.
+- [X] He añadido filtro o búsqueda, paginación y `with()`.
+- [X] He documentado cada versión y realizado sus pruebas.
+- [X] El README permite reproducir la instalación sin credenciales privadas.
